@@ -39,7 +39,7 @@ namespace Sandbox.UI.AtmPanel
 		this.switchable = true;
 		this.AutoEnter = true;
 		this.IB = InputButton.Use;
-		this.RadiusEnter = 20.0f;
+		this.RadiusEnter = 22.0f;
 		this.StyleSheet.Load( "/ui/atm/base/AtmPanel.scss" );
 		Container = Add.Panel("CONTAINER");
 		Container.AddClass("GLASS");
