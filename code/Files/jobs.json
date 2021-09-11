@@ -1,0 +1,35 @@
+[{
+        "Name": "Citoyen",
+        "Description": "Description",
+        "Icon": "",
+        "Places": 0,
+        "Salary": 100.0,
+        "Health": 100.0,
+        "CanSelect": false,
+        "CategID": "legal"
+    },
+    {
+        "Name": "Cuisinier",
+        "Description": "Description",
+        "Icon": "",
+        "Places": 2,
+        "Salary": 109.0,
+        "CategID": "legal"
+    },
+    {
+        "Name": "Policier",
+        "Description": "Description",
+        "Icon": "",
+        "Places": 3,
+        "Salary": 110.0,
+        "CategID": "forces"
+    },
+    {
+        "Name": "Chef Policier",
+        "Description": "Description",
+        "Icon": "",
+        "Places": 3,
+        "Salary": 110.0,
+        "CategID": "forces"
+    }
+]

@@ -1,0 +1,131 @@
+.GLASS {
+    position: absolute;
+    transition: all 100ms linear;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.GLASS_HOVER:hover,
+.HOVER:hover {
+    cursor: pointer;
+    transition: all 250ms linear;
+    transform: scale(0.95);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.57);
+}
+
+.TEXT,
+.TEXT>* {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgb(71 97 206 / 36%);
+}
+
+.FULL,
+.FULL>*,
+.DISABLED,
+.DISABLED>* {
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+.ACTIVE {
+    background-color: rgba(46, 204, 113, 0.25) !important;
+    transform: scale(0.95);
+}
+
+JobMenu {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: 0;
+    left: 0;
+    &.SHOW {
+        height: 100%;
+        width: 100%;
+    }
+    .CONTENT {
+        pointer-events: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: none;
+        &.SHOW {
+            display: flex;
+            pointer-events: all;
+        }
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        & .BASE {
+            height: 75%;
+            width: 75%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            overflow: hidden;
+            & .BASE_HEADER {
+                border-radius: 10px 10px 0 0;
+                height: 10%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background-color: rgba(52, 152, 219, 0.25);
+                text-align: center;
+                & .BASE_HEADER_TITLE {
+                    font-size: 32px;
+                }
+                & .BASE_HEADER_SUBTITLE {
+                    font-size: 22px;
+                }
+                & .BASE_HEADER_CLOSE,
+                & .BASE_HEADER_BACK {
+                    position: absolute;
+                    top: 5px;
+                    height: 70px;
+                    width: 70px;
+                    font-size: 42px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                }
+                & .BASE_HEADER_CLOSE {
+                    background-color: rgba(192, 57, 43, 0.8);
+                    right: 5px;
+                }
+                & .BASE_HEADER_BACK {
+                    display: none;
+                    &.SHOW {
+                        display: flex;
+                    }
+                    background-color: rgba(142, 68, 173, 0.8);
+                    left: 5px;
+                }
+            }
+            & .BASE_CONTAINER {
+                height: 90%;
+                width: 100%;
+                background-color: rgba(41, 128, 185, 0.25);
+                display: flex;
+            }
+        }
+    }
+}
+
+.SHOW {
+    display: flex;
+    pointer-events: all;
+}

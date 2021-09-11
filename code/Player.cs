@@ -1,11 +1,30 @@
 ﻿using Sandbox;
+using Sandbox.Jobs;
+using Sandbox.Jobs.Activity;
+using Sandbox.Jobs.Category;
+using Sandbox.UI;
+using Sandbox.UI.JobsMenu;
+using System.Collections.Generic;
 
 partial class SandboxPlayer : Player
 {
 	private TimeSince timeSinceDropped;
 	private TimeSince timeSinceJumpReleased;
 
+	public TimeSince timeSinceHudBind;
+
+	private TimeSince timeSinceLastSalary;
 	private DamageInfo lastDamage;
+	public Job CurrentJob {get; set;} = new(-1);
+	public JobsActivity CurrentActivity {get; set;} = new(-1);
+
+	[Net] public float Wallet {get; set;} = 200.0f;
+	[Net] public float Bank {get; set;} = 0.0f;
+
+
+	[Net] public string JobName {get; set;} = "Citoyen";
+	[Net] public string JobActivityName {get; set;} = "";
+	[Net] public int JobID {get; set;} = -1;
 
 	[Net] public PawnController VehicleController { get; set; }
 	[Net] public PawnAnimator VehicleAnimator { get; set; }
@@ -15,6 +34,9 @@ partial class SandboxPlayer : Player
 
 	public ICamera LastCamera { get; set; }
 
+	public TimeSince timeSinceRollInventory; 
+
+	
 	public SandboxPlayer()
 	{
 		Inventory = new Inventory( this );
@@ -51,12 +73,15 @@ partial class SandboxPlayer : Player
 		Dress();
 
 		Inventory.Add( new PhysGun(), true );
-		Inventory.Add( new GravGun() );
+		//Inventory.Add( new GravGun() );
 		Inventory.Add( new Tool() );
-		Inventory.Add( new Pistol() );
+		//Inventory.Add( new Pistol() );
 		Inventory.Add( new Flashlight() );
 
 		base.Respawn();
+
+		this.Health = this.CurrentJob.Health;
+
 	}
 
 	public override void OnKilled()
@@ -131,7 +156,16 @@ partial class SandboxPlayer : Player
 
 	public override void Simulate( Client cl )
 	{
-		base.Simulate( cl );
+		base.Simulate( cl ); 
+
+
+		if( timeSinceLastSalary >= 120.0f )
+		{
+			float s = (CurrentJob.Salary * 2.0f) / 60.0f;
+			Bank += s;
+			timeSinceLastSalary = 0.0f;
+		}
+
 
 		if ( Input.ActiveChild != null )
 		{
@@ -202,6 +236,38 @@ partial class SandboxPlayer : Player
 		base.StartTouch( other );
 	}
 
+	public bool AddMoney(float take, bool fromWallet = true)
+	{
+		if ( IsClient ) return false;
+		if(take < 0.0f && (!HasMoney(-take,fromWallet))) {
+			Log.Error("NOT ENOUGH MONEY");
+			return false;
+		}
+		if(fromWallet == true) this.Wallet += take;
+		else this.Bank += take;
+		return true;
+	}
+
+	public bool HasMoney(float take, bool fromWallet = true)
+	{
+		return ((fromWallet == true ? this.Wallet : this.Bank) - take) >= 0.0f;
+	}
+
+
+	[ClientRpc]
+	public static void UpdateJob(int CLIENTID, int PLACES,int NEWPLACESTAKEN)
+	{
+		JobMenu JobMenu = SandboxHud.JobMenu;
+		if(JobMenu == null || JobMenu.STEP_2 == null) return;
+		JobsStep JobsStep = JobMenu.STEP_2;
+		if(JobsStep == null || JobsStep.JobCountList == null) return;
+		JobsStep.JobCountList.ForEach((Label JobCount) => {
+				if(JobCount.HasClass($"JOBID_{CLIENTID}")) {
+					JobCount.Text = $"{NEWPLACESTAKEN}/{PLACES}";
+				}
+		});
+	}
+
 	[ServerCmd( "inventory_current" )]
 	public static void SetInventoryCurrent( string entName )
 	{
@@ -227,14 +293,58 @@ partial class SandboxPlayer : Player
 		}
 	}
 
-	// TODO
+	[ServerCmd( "BecomeJob")]
 
-	//public override bool HasPermission( string mode )
-	//{
-	//	if ( mode == "noclip" ) return true;
-	//	if ( mode == "devcam" ) return true;
-	//	if ( mode == "suicide" ) return true;
-	//
-	//	return base.HasPermission( mode );
-	//	}
-}
+	public static void BecomeJob(int ID = -1, int IDACT = -1)
+	{
+		if(ConsoleSystem.Caller.Pawn is SandboxPlayer player)
+		{
+			player.JobName = "";
+			player.JobActivityName = "";
+			
+			List<JobsCategory> CategList = SandboxGame.JobsCategoriesList.CategList;
+			Job JobSelected = null;
+			JobsActivity ActivitySelected = null;
+
+			CategList.ForEach((JobsCategory Category) => {
+				Category.JobsList.ForEach((Job Job) => {
+					if(JobSelected == null && Job.UniqueID == ID) JobSelected = Job;
+				});
+			});
+
+			if(JobSelected == null) return;
+
+			if(IDACT != -1) JobSelected.Activities.ForEach((JobsActivity JobsActivity) => { if(ActivitySelected == null && JobsActivity.UniqueID == IDACT) ActivitySelected = JobsActivity;});
+
+
+			if(JobSelected.TakeJob() == false) return;
+			if(player.CurrentJob.OutJob() == false) return;
+			UpdateJob(player.CurrentJob.UniqueID,player.CurrentJob.Places,player.CurrentJob.PlacesTaken);
+			UpdateJob(JobSelected.UniqueID,JobSelected.Places,JobSelected.PlacesTaken);
+
+			player.CurrentJob = JobSelected;
+			if(ActivitySelected != null) {
+				player.CurrentActivity = ActivitySelected;
+				player.JobActivityName = ActivitySelected.Name;
+			}
+			player.JobName = JobSelected.Name;
+			player.Respawn();
+			player.timeSinceLastSalary = 0.0f;
+		
+		}
+		
+	}
+
+
+
+		// TODO
+
+		//public override bool HasPermission( string mode )
+		//{
+		//	if ( mode == "noclip" ) return true;
+		//	if ( mode == "devcam" ) return true;
+		//	if ( mode == "suicide" ) return true;
+		//
+		//	return base.HasPermission( mode );
+		//	}
+	}

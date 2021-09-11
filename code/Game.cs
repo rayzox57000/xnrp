@@ -1,8 +1,10 @@
 ﻿using Sandbox;
+using Sandbox.Jobs.Categories;
 
 [Library( "sandbox", Title = "Sandbox" )]
 partial class SandboxGame : Game
 {
+	public static JobsCategories JobsCategoriesList = new();
 	public SandboxGame()
 	{
 		if ( IsServer )
@@ -33,6 +35,17 @@ partial class SandboxGame : Game
 
 		if ( ConsoleSystem.Caller == null )
 			return;
+
+		if (owner is SandboxPlayer p)
+		{
+				if (!p.AddMoney(-05.0f)) return;
+		} else {
+			return;
+		}
+
+
+
+		
 
 		var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
 			.UseHitboxes()

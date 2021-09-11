@@ -1,0 +1,13 @@
+[{
+        "ID": "legal",
+        "Name": "Legal",
+        "Description": "Description",
+        "Icon": ""
+    },
+    {
+        "ID": "forces",
+        "Name": "Forces de L'ordre",
+        "Description": "Description",
+        "Icon": ""
+    }
+]

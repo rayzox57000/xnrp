@@ -34,6 +34,10 @@
 
 				tr.Entity.Delete();
 
+				if(Owner is SandboxPlayer p) p.AddMoney(02.5f);
+
+				
+
 				var particle = Particles.Create( "particles/physgun_freeze.vpcf" );
 				particle.SetPosition( 0, tr.Entity.Position );
 			}

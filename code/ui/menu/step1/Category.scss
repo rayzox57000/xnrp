@@ -1,0 +1,64 @@
+.GLASS_CONTAINER {
+    transition: all 100ms linear;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.GLASS_HOVER_CATEGORY:hover {
+    cursor: pointer;
+    transition: all 250ms linear;
+    transform: scale(0.95);
+    backdrop-filter: saturate(0.8);
+}
+
+CategoryStep {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    & .CATEGORY {
+        border-radius: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        transition: all 250ms linear;
+        & .JOB_TITLE {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 30px;
+            padding: 10px;
+            height: 12%;
+        }
+        & .JOB_ICON {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 78%;
+            max-width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 400px 400px;
+        }
+        & .JOB_COUNT_VALUE {
+            font-size: 35px;
+        }
+    }
+}
+
+.FULL,
+.FULL>*,
+.DISABLED,
+.DISABLED>* {
+    pointer-events: none;
+    filter: saturate(100%);
+}

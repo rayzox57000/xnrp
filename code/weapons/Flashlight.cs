@@ -207,4 +207,10 @@ partial class Flashlight : Weapon
 			}
 		}
 	}
+
+	public bool IsOn()
+	{
+		return this.LightEnabled;
+	}
+
 }
