@@ -37,9 +37,27 @@ partial class SandboxPlayer : Player
 	public TimeSince timeSinceRollInventory; 
 
 	
+
+	/// <summary>
+	/// The clothing container is what dresses the citizen
+	/// </summary>
+	public Clothing.Container Clothing = new();
+
+	/// <summary>
+	/// Default init
+	/// </summary>
 	public SandboxPlayer()
 	{
 		Inventory = new Inventory( this );
+	}
+
+	/// <summary>
+	/// Initialize using this client
+	/// </summary>
+	public SandboxPlayer( Client cl ) : this()
+	{
+		// Load clothing from client data
+		Clothing.LoadFromClient( cl );
 	}
 
 	public override void Spawn()
@@ -70,7 +88,7 @@ partial class SandboxPlayer : Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		Dress();
+		Clothing.DressEntity( this );
 
 		Inventory.Add( new PhysGun(), true );
 		//Inventory.Add( new GravGun() );
