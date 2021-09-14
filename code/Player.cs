@@ -5,6 +5,7 @@ using Sandbox.Jobs.Category;
 using Sandbox.UI;
 using Sandbox.UI.JobsMenu;
 using System.Collections.Generic;
+using System.Linq;
 
 partial class SandboxPlayer : Player
 {
@@ -20,6 +21,9 @@ partial class SandboxPlayer : Player
 
 	[Net] public float Wallet {get; set;} = 200.0f;
 	[Net] public float Bank {get; set;} = 0.0f;
+
+	[Net] public int PropCount { get; set; } = 0;
+	[Net] public int PropTotal { get; set; } = 0;
 
 
 	[Net] public string JobName {get; set;} = "Citoyen";
@@ -269,6 +273,11 @@ partial class SandboxPlayer : Player
 	public bool HasMoney(float take, bool fromWallet = true)
 	{
 		return ((fromWallet == true ? this.Wallet : this.Bank) - take) >= 0.0f;
+	}
+
+	public void UpPropCount()
+	{
+		//PropCount = Entity.All.OfType<PropExtended>().Where( e => e.Owner == this ).Count();			
 	}
 
 

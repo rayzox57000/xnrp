@@ -38,25 +38,20 @@ partial class SandboxGame : Game
 
 		if (owner is SandboxPlayer p)
 		{
-				if (!p.AddMoney(-05.0f)) return;
-		} else {
-			return;
+			if (!p.AddMoney(-05.0f)) return;
+
+			var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
+				.UseHitboxes()
+				.Ignore( owner )
+				.Run();
+
+			var ent = new PropExtended();
+			ent.Position = tr.EndPos;
+			ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
+			ent.SetModel( modelname );
+			ent.Position = tr.EndPos - Vector3.Up * ent.CollisionBounds.Mins.z;
+			ent.setOwner( p );
 		}
-
-
-
-		
-
-		var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
-			.UseHitboxes()
-			.Ignore( owner )
-			.Run();
-
-		var ent = new Prop();
-		ent.Position = tr.EndPos;
-		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
-		ent.SetModel( modelname );
-		ent.Position = tr.EndPos - Vector3.Up * ent.CollisionBounds.Mins.z;
 	}
 
 	[ServerCmd( "spawn_entity" )]
