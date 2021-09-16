@@ -28,6 +28,12 @@
 				if ( tr.Entity is not Prop prop )
 					return;
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( p != tr.Entity.Owner ) return;
+				}
+
 				if ( Input.Pressed( InputButton.Attack1 ) )
 				{
 					if ( prop.Root is not Prop rootProp )

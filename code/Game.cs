@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.Jobs.Categories;
+using System.Linq;
 
 [Library( "sandbox", Title = "Sandbox" )]
 partial class SandboxGame : Game
@@ -38,6 +39,8 @@ partial class SandboxGame : Game
 
 		if (owner is SandboxPlayer p)
 		{
+			if ( p.TimeSincePropSpawn < 6.0f ) return;
+			p.TimeSincePropSpawn = 0.0f;
 			if (!p.AddMoney(-05.0f)) return;
 
 			var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
@@ -45,12 +48,18 @@ partial class SandboxGame : Game
 				.Ignore( owner )
 				.Run();
 
-			var ent = new PropExtended();
+			if ( Entity.All.OfType<Prop>().Where( e => (SandboxPlayer)e.Owner == p ).Count() + 1 > p.PropTotal )
+			{
+				Log.Error( "PROP LIMIT REACH .... REMOVE BEFORE RESPAWN" );
+				return;
+			}
+
+			var ent = new Prop();
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 			ent.SetModel( modelname );
 			ent.Position = tr.EndPos - Vector3.Up * ent.CollisionBounds.Mins.z;
-			ent.setOwner( p );
+			ent.Owner = p;
 		}
 	}
 

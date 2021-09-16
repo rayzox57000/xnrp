@@ -37,6 +37,13 @@
 				if ( tr.Entity is not ModelEntity )
 					return;
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( (!tr.Entity.IsWorld) && p != tr.Entity.Owner ) return;
+				}
+
+
 				if ( !targetBody.IsValid() )
 				{
 					targetBody = tr.Body;

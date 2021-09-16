@@ -6,6 +6,7 @@ using Sandbox.UI.CurrentTool;
 using Sandbox.UI.FlashLight;
 using Sandbox.UI.Pg;
 using Sandbox.UI.Keys;
+using Sandbox.UI.PropCount;
 
 [Library]
 public partial class SandboxHud : HudEntity<RootPanel>
@@ -34,6 +35,7 @@ public partial class SandboxHud : HudEntity<RootPanel>
 		RootPanel.AddChild<FlashLight>();
 		RootPanel.AddChild<Pg>();
 		RootPanel.AddChild<Keys>();
+		RootPanel.AddChild<PropCount>();
 		RootPanel.AddChild<SpawnMenu>();
 		RootPanel.AddChild(JobMenu);
 		RootPanel.AddChild<AtmPanel>();

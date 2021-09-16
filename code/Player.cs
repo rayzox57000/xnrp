@@ -16,15 +16,17 @@ partial class SandboxPlayer : Player
 
 	private TimeSince timeSinceLastSalary;
 	private DamageInfo lastDamage;
-	public Job CurrentJob {get; set;} = new(-1);
-	public JobsActivity CurrentActivity {get; set;} = new(-1);
+	public Job CurrentJob { get; set; } = new( -1 );
+	public JobsActivity CurrentActivity { get; set; } = new( -1 );
 
-	[Net] public float Wallet {get; set;} = 200.0f;
-	[Net] public float Bank {get; set;} = 0.0f;
+	[Net] public float Wallet { get; set; } = 200.0f;
+	[Net] public float Bank { get; set; } = 0.0f;
 
 	[Net] public int PropCount { get; set; } = 0;
-	[Net] public int PropTotal { get; set; } = 0;
+	[Net] public int PropTotal { get; set; } = 20;
 
+	public TimeSince TimeSincePropSpawn = 6.0f;
+	[Net] public float ClientTimeSincePropSpawn { get; private set; } = 0;
 
 	[Net] public string JobName {get; set;} = "Citoyen";
 	[Net] public string JobActivityName {get; set;} = "";
@@ -178,10 +180,11 @@ partial class SandboxPlayer : Player
 
 	public override void Simulate( Client cl )
 	{
-		base.Simulate( cl ); 
+		base.Simulate( cl );
 
+		ClientTimeSincePropSpawn = TimeSincePropSpawn;
 
-		if( timeSinceLastSalary >= 120.0f )
+		if ( timeSinceLastSalary >= 120.0f )
 		{
 			float s = (CurrentJob.Salary * 2.0f) / 60.0f;
 			Bank += s;
@@ -273,11 +276,6 @@ partial class SandboxPlayer : Player
 	public bool HasMoney(float take, bool fromWallet = true)
 	{
 		return ((fromWallet == true ? this.Wallet : this.Bank) - take) >= 0.0f;
-	}
-
-	public void UpPropCount()
-	{
-		//PropCount = Entity.All.OfType<PropExtended>().Where( e => e.Owner == this ).Count();			
 	}
 
 

@@ -27,16 +27,21 @@
 				if ( tr.Entity is Player )
 					return;
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( p != tr.Entity.Owner ) return;
+				}
+
+
+				AddMoney( Owner as SandboxPlayer, tr.Entity );
+
 				CreateHitEffects( tr.EndPos );
 
 				if ( tr.Entity.IsWorld )
 					return;
 
 				tr.Entity.Delete();
-
-				if(Owner is SandboxPlayer p) p.AddMoney(02.5f);
-
-				
 
 				var particle = Particles.Create( "particles/physgun_freeze.vpcf" );
 				particle.SetPosition( 0, tr.Entity.Position );

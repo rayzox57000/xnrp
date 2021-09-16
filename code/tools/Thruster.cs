@@ -53,6 +53,13 @@
 				if ( !tr.Entity.IsValid() )
 					return;
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( (!tr.Entity.IsWorld) && p != tr.Entity.Owner ) return;
+				}
+
+
 				var attached = !tr.Entity.IsWorld && tr.Body.IsValid() && tr.Body.PhysicsGroup != null && tr.Body.Entity.IsValid();
 
 				if ( attached && tr.Entity is not Prop )

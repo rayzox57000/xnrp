@@ -31,6 +31,13 @@ namespace Sandbox.Tools
 				if ( !tr.Hit || !tr.Entity.IsValid() )
 					return;
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( p != tr.Entity.Owner ) return;
+				}
+
+
 				var entity = tr.Entity.Root;
 				if ( !entity.IsValid() )
 					return;

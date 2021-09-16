@@ -61,6 +61,12 @@
 					return;
 				}
 
+				if ( Owner is SandboxPlayer p )
+				{
+					if ( p == null ) return;
+					if ( (!tr.Entity.IsWorld) && p != tr.Entity.Owner ) return;
+				}
+
 				var ent = new WheelEntity
 				{
 					Position = tr.EndPos,

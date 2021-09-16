@@ -126,6 +126,12 @@ public partial class PhysGun : Carriable
 
 		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld ) return;
 
+		if ( owner is SandboxPlayer p )
+		{
+			if ( p == null ) return;
+			if ( p != tr.Entity.Owner ) return;
+		}
+
 		var rootEnt = tr.Entity.Root;
 		if ( !rootEnt.IsValid() ) return;
 
@@ -165,6 +171,12 @@ public partial class PhysGun : Carriable
 
 		var rootEnt = tr.Entity.Root;
 		var body = tr.Body;
+
+		if ( owner is SandboxPlayer p )
+		{
+			if ( p == null ) return;
+			if ( p != tr.Entity.Owner ) return;
+		}
 
 		if ( tr.Entity.Parent.IsValid() )
 		{
