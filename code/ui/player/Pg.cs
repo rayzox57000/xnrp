@@ -10,11 +10,17 @@ namespace Sandbox.UI.Pg
 	{
 		public Label Title;
 		public Label Description;
+		public Label Position;
+		public Label Angles;
+		public Label Owner;
 
 		public Pg()
 		{
 			Title = Add.Label( "PhysGun", "title" );
 			Description = Add.Label("", "description");
+			Position = Add.Label("Position : ---","position");
+			Angles = Add.Label("Angles : ---","angles");
+			Owner = Add.Label("Owner : ---","owner");
 		}
 
 		public override void Tick()
@@ -44,18 +50,31 @@ namespace Sandbox.UI.Pg
 					var ent = tr.Entity as Entity;
 					string s = ent.ClassInfo.Name;
 
-					
-
 					if(ent is Sandbox.Prop pr)
 					{
+						AddClass("focused");
 						var m = pr.GetModelName();
 						var mn = m.Substring(m.LastIndexOf("/")+1);
 						s += " ( Modèle : " + Regex.Replace(mn, $"{".vmdl"}$", "") + " )";
 					}
 
+					Vector3 ps = ent.Position;
+					Position.SetText( $"Position : x: {ps.x.ToString( "0.00" )} y: {ps.y.ToString( "0.00" )} z: {ps.z.ToString( "0.00" )}" );
+					Rotation an = ent.Rotation;
+					Angles.SetText( $"Angles : x: {an.x.ToString( "0.00" )} y: {an.y.ToString( "0.00" )} z: {an.z.ToString( "0.00" )}" );
+					string owner = "World";
+
+					if(ent.Owner is SandboxPlayer sp) owner = sp.GetClientOwner().Name;
+
+					Owner.SetText( $"Owner : {owner}" );
+
 					return s;
 				}
 			}
+			Position.SetText( "Position : ---" );
+			Angles.SetText( "Angles : ---" );
+			Owner.SetText( "Owner : ---" );
+			RemoveClass("focused");
 			return "Vous n'avez rien devant vous.";
 		}
 

@@ -199,13 +199,28 @@ PropCount {
         font-family: 'poppins';
         font-size: 15px;
     }
-    .description {
+    .description,
+    .position,
+    .angles,
+    .owner {
         transition: all 100ms linear;
         opacity: 1;
         padding: 0;
         text-align: right;
         font-family: 'poppins';
         font-size: 15px;
+        color: white;
+    }
+    .position {
+        margin-top: 20px;
+    }
+    .position,
+    .angles,
+    .owner {
+        padding: 5px;
+        font-size: 12px;
+        text-align: left;
+        font-weight: bold;
     }
     &.hide {
         border: 0;
@@ -226,6 +241,20 @@ Keys {
         margin-top: 5px;
         font-size: 12px;
         font-weight: bold;
+    }
+}
+
+Pg {
+    &.focused {
+        top: 820px;
+        height: 150px;
+    }
+    &:not(.focused) {
+        & .position,
+        & .angles,
+        & .owner {
+            display: none;
+        }
     }
 }
 

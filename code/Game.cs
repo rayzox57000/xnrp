@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Maps;
 using Sandbox.Jobs.Categories;
 using System.Linq;
 
@@ -6,10 +7,22 @@ using System.Linq;
 partial class SandboxGame : Game
 {
 	public static JobsCategories JobsCategoriesList = new();
+
+	public void InitSpawn() // WIP
+	{
+		string map = Global.MapName;
+		if(map == "facepunch.construct" ) new Construct().Init();
+		if ( map == "htu.street" ) new HtuStreet().Init();
+
+	}
+
+
 	public SandboxGame()
 	{
+		
 		if ( IsServer )
 		{
+			InitSpawn();
 			// Create the HUD
 			_ = new SandboxHud();
 		}
@@ -68,31 +81,38 @@ partial class SandboxGame : Game
 	{
 		var owner = ConsoleSystem.Caller.Pawn;
 
-		if ( owner == null )
-			return;
-
-		var attribute = Library.GetAttribute( entName );
-
-		if ( attribute == null || !attribute.Spawnable )
-			return;
-
-		var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 200 )
-			.UseHitboxes()
-			.Ignore( owner )
-			.Size( 2 )
-			.Run();
-
-		var ent = Library.Create<Entity>( entName );
-		if ( ent is BaseCarriable && owner.Inventory != null )
+			if (owner is SandboxPlayer p)
 		{
-			if ( owner.Inventory.Add( ent, true ) )
+
+			if ( owner == null )
 				return;
+
+			var attribute = Library.GetAttribute( entName );
+
+			if ( attribute == null || !attribute.Spawnable )
+				return;
+
+			var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 200 )
+				.UseHitboxes()
+				.Ignore( owner )
+				.Size( 2 )
+				.Run();
+
+			var ent = Library.Create<Entity>( entName );
+			if ( ent is BaseCarriable && owner.Inventory != null )
+			{
+				if ( owner.Inventory.Add( ent, true ) )
+					return;
+			}
+
+			Log.Info( tr.EndPos );
+
+			ent.Position = tr.EndPos;
+			ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) );
+			ent.Owner = p;
+
+			//Log.Info( $"ent: {ent}" );
 		}
-
-		ent.Position = tr.EndPos;
-		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) );
-
-		//Log.Info( $"ent: {ent}" );
 	}
 
 	public override void DoPlayerNoclip( Client player )
