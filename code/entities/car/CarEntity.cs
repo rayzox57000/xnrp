@@ -487,7 +487,7 @@ public partial class CarEntity : Prop, IUse
 			driver = player;
 		}
 
-		return true;
+		return false;
 	}
 
 	public bool IsUsable( Entity user )
