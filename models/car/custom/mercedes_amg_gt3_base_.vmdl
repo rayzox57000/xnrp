@@ -1,0 +1,94 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "mercedes_amg_gt3_default_01.vmat"
+								to = "materials/car/custom/m_amg_gt3/m_amg_gt3_1.vmat"
+							},
+							{
+								from = "mercedes_amg_gt3_default_21.vmat"
+								to = "materials/car/custom/m_amg_gt3/skin1/m_amg_gt3_21_skin1.vmat"
+							},
+							{
+								from = "mercedes_amg_gt3_glass.vmat"
+								to = "materials/car/custom/m_amg_gt3/m_amg_gt3_glass.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "2"
+						remaps = 
+						[
+							{
+								from = "mercedes_amg_gt3_default_01.vmat"
+								to = "materials/car/custom/m_amg_gt3/m_amg_gt3_1.vmat"
+							},
+							{
+								from = "mercedes_amg_gt3_default_21.vmat"
+								to = "materials/car/custom/m_amg_gt3/skin1/m_amg_gt3_21_skin2.vmat"
+							},
+							{
+								from = "mercedes_amg_gt3_glass.vmat"
+								to = "materials/car/custom/m_amg_gt3/m_amg_gt3_glass.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_prop = "default"
+						origin = [ 7.01149, 0.120975, 42.2341 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 221.309738, 99.072968, 57.343079 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "resources/car/custom/m_amg_gt3/Mercedes_amg_gt3_base .fbx"
+						import_translation = [ 10.0, 0.0, 15.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.5
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+	}
+}

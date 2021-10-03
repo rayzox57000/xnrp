@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 [Library( "ent_car", Title = "Car", Spawnable = true )]
 public partial class CarEntity : Prop, IUse
@@ -56,8 +58,40 @@ public partial class CarEntity : Prop, IUse
 
 	private InputState currentInput;
 
+
+	private static Random random = new Random();
+	public string plateP1 { get; private set; }
+	public string plateP2 { get; private set; }
+	public string plateP3 { get; private set; }
+	public string plate { get; private set; }
+	private static string plateModel = "models/car/plate/sym/{{name}}.vmdl";
+
+	private static string getLetterModel(char c)
+	{
+		return plateModel.Replace( "{{name}}", c.ToString() );
+	}
+
+	
+
+	private List<ModelEntity> LettersFront = new List<ModelEntity>();
+	private List<ModelEntity> LettersRear = new List<ModelEntity>();
+
+	private static string RandomString( int length, bool letters = true, bool numbers = true )
+	{
+
+		string chars = (letters ? "azertyuiopqsdfghjklxcvbn" : "") + (numbers ? "123456789" : "");
+		return new string( Enumerable.Repeat( chars, length )
+		  .Select( s => s[random.Next( s.Length )] ).ToArray() );
+	}
+
 	public CarEntity()
 	{
+		plateP1 = RandomString( 2, true ,false) ;
+		plateP2 = RandomString( 3, false, true );
+		plateP3 = RandomString( 2, true, false );
+		plate = $"{plateP1}-{plateP2}-{plateP3}";
+		plate = "NN-987-NN";
+
 		frontLeft = new CarWheel( this );
 		frontRight = new CarWheel( this );
 		backLeft = new CarWheel( this );
@@ -72,14 +106,95 @@ public partial class CarEntity : Prop, IUse
 	private ModelEntity wheel1;
 	private ModelEntity wheel2;
 	private ModelEntity wheel3;
+	private ModelEntity plateFront;
+	private ModelEntity plateRear;
+
+
+	// Override Rayzox57
+
+	// POTENTIAL ARTIST (CHANGE IN SPAWN)
+	public string artistName { get; protected set; } = "FacePunch";
+		public string artistUrl { get; protected set; } = "https://facepunch.com";
+		public string artistModelUrl { get; protected set; } = "";
+
+		// MODELS (CHANGE IN SPAWN)
+		protected string modelName { get; set; } = "models/car/car.vmdl";
+
+	// MODELS P2 (CHANGE IN CLIENTSPAWN)
+
+		protected int skin { get; set; } = -1;
+
+		protected string modelNameFuelTank { get; set; } = "entities/modular_vehicle/vehicle_fuel_tank.vmdl";
+		protected string modelNameChassisFront { get; set; } = "entities/modular_vehicle/chassis_axle_front.vmdl";
+		protected string modelNameWheelFrontRight { get; set; } = "entities/modular_vehicle/wheel_a.vmdl";
+		protected string modelNameWheelFrontLeft { get; set; } = "entities/modular_vehicle/wheel_a.vmdl";
+		protected string modelNameChassisSteering { get; set; } = "entities/modular_vehicle/chassis_steering.vmdl";
+
+		protected string modelNameChassisRear { get; set; } = "entities/modular_vehicle/chassis_axle_rear.vmdl";
+		protected string modelNameChassisTransmission { get; set; } = "entities/modular_vehicle/chassis_transmission.vmdl";
+		protected string modelNameWheelRearRight { get; set; } = "entities/modular_vehicle/wheel_a.vmdl";
+		protected string modelNameWheelRearLeft { get; set; } = "entities/modular_vehicle/wheel_a.vmdl";
+
+		// VISIBLE (CHANGE IN CLIENTSPAWN)
+		protected bool FuelTankShow { get; set; } = true;
+		protected bool ChassisFrontShow { get; set; } = true;
+		protected bool WheelGlobalShow { get; set; } = true;
+		protected bool WheelFrontRightShow { get; set; } = true;
+		protected bool WheelFrontLeftShow { get; set; } = true;
+		protected bool ChassisSteeringShow { get; set; } = true;
+		protected bool ChassisRearShow { get; set; } = true;
+		protected bool ChassisTransmissionShow { get; set; } = true;
+		protected bool WheelRearLeftShow { get; set; } = true;
+		protected bool WheelRearRightShow { get; set; } = true;
+		protected bool PlateGlobalShow { get; set; } = true;
+		protected bool PlateFrontShow { get; set; } = true;
+		protected bool PlateRearShow { get; set; } = true;
+
+
+	// BASE POSITION
+	protected Vector3 BaseModelPosition { get; set; } = new Vector3( 0, 0, 0 );
+
+	// POSITION // ROTATION (CHANGE IN CLIENTSPAWN)
+	protected Vector3 FuelTankPosition { get; set; } = new Vector3( 0.75f, 0, 0 );
+		protected Vector3 ChassisFrontPosition { get; set; } = new Vector3( 1.05f, 0, 0.35f );
+
+		protected Vector3 WheelFrontRightPosition { get; set; } = Vector3.Zero;
+		protected Rotation WheelFrontRightRotation { get; set; } = Rotation.From( 0, 180, 0 );
+
+		protected Vector3 WheelFrontLeftPosition { get; set; } = Vector3.Zero;
+		protected Rotation WheelFrontLeftRotation { get; set; } = Rotation.From( 0, 0, 0 );
+
+		protected Vector3 ChassisSteeringPosition { get; set; } = Vector3.Zero;
+		protected Rotation ChassisSteeringRotation { get; set; } = Rotation.From( -90, 180, 0 );
+
+		protected Vector3 ChassisRearPosition { get; set; } = new Vector3( -1.05f, 0, 0.35f );
+
+		protected Vector3 ChassisTransmissionPosition { get; set; } = Vector3.Zero;
+		protected Rotation ChassisTransmissionRotation { get; set; } = Rotation.From( -90, 180, 0 );
+
+		protected float WheelRearLeftPosition { get; set; } = (0.7f * 40);
+		protected Rotation WheelRearLeftRotation { get; set; } = Rotation.From( 0, 90, 0 );
+
+		protected float WheelRearRightPosition { get; set; } = (0.7f * 40);
+		protected Rotation WheelRearRightRotation { get; set; } = Rotation.From( 0, -90, 0 );
+
+
+		protected Vector3 PlateFrontPosition { get; set; } = new Vector3( 0.6f, -0.0f, 0.3f );
+		protected Rotation PlateFrontRotation { get; set; } = Rotation.From( 90, 90, 90 );
+
+		protected Vector3 PlateRearPosition { get; set; } = new Vector3( -2.0f, -0.0f, 0.3f );
+		protected Rotation PlateRearRotation { get; set; } = Rotation.From( 90, -90, 90 );
+
+
+	// End Override
 
 	public override void Spawn()
 	{
 		base.Spawn();
-
-		var modelName = "models/car/car.vmdl";
-
 		SetModel( modelName );
+
+		if ( skin > -1 ) SetMaterialGroup( skin );
+		
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic, false );
 		SetInteractsExclude( CollisionLayer.Player );
 		EnableSelfCollisions = false;
@@ -102,65 +217,127 @@ public partial class CarEntity : Prop, IUse
 	public override void ClientSpawn()
 	{
 		base.ClientSpawn();
-
 		{
 			var vehicle_fuel_tank = new ModelEntity();
-			vehicle_fuel_tank.SetModel( "entities/modular_vehicle/vehicle_fuel_tank.vmdl" );
+			vehicle_fuel_tank.SetModel( modelNameFuelTank );
 			vehicle_fuel_tank.Transform = Transform;
 			vehicle_fuel_tank.Parent = this;
-			vehicle_fuel_tank.LocalPosition = new Vector3( 0.75f, 0, 0 ) * 40.0f;
+			vehicle_fuel_tank.LocalPosition = FuelTankPosition * 40.0f;
+			vehicle_fuel_tank.RenderColor = new Color( 255,255,255, FuelTankShow ? 255 : 0 );
+
+			{
+				plateFront = new ModelEntity();
+				plateFront.SetModel( "models/car/plate/car_plate.vmdl" );
+				plateFront.SetParent(vehicle_fuel_tank,"", new Transform( PlateFrontPosition * 40.0f, PlateFrontRotation) );
+				plateFront.RenderColor = new Color( 255, 255, 255, PlateGlobalShow && PlateFrontShow ? 255 : 0 );
+
+				{
+
+					float y = -0.18f;
+
+					foreach(char c in plate)
+					{
+						if ( PlateGlobalShow && PlateFrontShow )
+						{
+							var letter = new ModelEntity();
+							letter.SetModel( getLetterModel( c ) );
+							letter.SetParent( plateFront, "", new Transform( new Vector3( 0, y, 0.001f ) * 40.0f, Rotation.From( 0, 0, 0 ) ) );
+							LettersFront.Add( letter );
+							y += 0.05f;
+						}
+					}
+				}
+
+			}
+
+			{
+				plateRear = new ModelEntity();
+				plateRear.SetModel( "models/car/plate/car_plate.vmdl" );
+				plateRear.SetParent( vehicle_fuel_tank, "", new Transform( PlateRearPosition * 40.0f, PlateRearRotation ) );
+				plateRear.RenderColor = new Color( 255, 255, 255, PlateGlobalShow && PlateRearShow ? 255 : 0 );
+
+
+				{
+
+					float y = -0.18f;
+
+					foreach ( char c in plate )
+					{
+						if ( PlateGlobalShow && PlateRearShow )
+						{
+							var letter = new ModelEntity();
+						letter.SetModel( getLetterModel( c ) );
+						letter.SetParent( plateRear, "", new Transform( new Vector3( 0, y, 0.001f ) * 40.0f, Rotation.From( 0, 0, 0 ) ) );
+						LettersRear.Add( letter );
+						y += 0.05f;
+							}
+					}
+				}
+
+			}
+
 		}
 
 		{
 			chassis_axle_front = new ModelEntity();
-			chassis_axle_front.SetModel( "entities/modular_vehicle/chassis_axle_front.vmdl" );
+			chassis_axle_front.SetModel( modelNameChassisFront );
 			chassis_axle_front.Transform = Transform;
 			chassis_axle_front.Parent = this;
-			chassis_axle_front.LocalPosition = new Vector3( 1.05f, 0, 0.35f ) * 40.0f;
+			chassis_axle_front.LocalPosition = ChassisFrontPosition * 40.0f;
+			chassis_axle_front.RenderColor = new Color( 255,255,255, ChassisFrontShow ? 255 : 0 );
 
 			{
 				wheel0 = new ModelEntity();
-				wheel0.SetModel( "entities/modular_vehicle/wheel_a.vmdl" );
-				wheel0.SetParent( chassis_axle_front, "Wheel_Steer_R", new Transform( Vector3.Zero, Rotation.From( 0, 180, 0 ) ) );
+				wheel0.SetModel( modelNameWheelFrontRight );
+				wheel0.SetParent( chassis_axle_front, "Wheel_Steer_R", new Transform( WheelFrontRightPosition, WheelFrontRightRotation ) );
+				wheel0.RenderColor = new Color( 255,255,255, WheelGlobalShow && WheelFrontRightShow ? 255 : 0 );
 			}
 
 			{
 				wheel1 = new ModelEntity();
-				wheel1.SetModel( "entities/modular_vehicle/wheel_a.vmdl" );
-				wheel1.SetParent( chassis_axle_front, "Wheel_Steer_L", new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
+				wheel1.SetModel( modelNameWheelFrontLeft );
+				wheel1.SetParent( chassis_axle_front, "Wheel_Steer_L", new Transform( WheelFrontLeftPosition, WheelFrontLeftRotation ) );
+				wheel1.RenderColor = new Color( 255,255,255, WheelGlobalShow && WheelFrontLeftShow ? 255 : 0 );
 			}
 
 			{
 				var chassis_steering = new ModelEntity();
-				chassis_steering.SetModel( "entities/modular_vehicle/chassis_steering.vmdl" );
-				chassis_steering.SetParent( chassis_axle_front, "Axle_front_Center", new Transform( Vector3.Zero, Rotation.From( -90, 180, 0 ) ) );
+				chassis_steering.SetModel( modelNameChassisSteering );
+				chassis_steering.SetParent( chassis_axle_front, "Axle_front_Center", new Transform( ChassisSteeringPosition, ChassisSteeringRotation ) );
+				chassis_steering.RenderColor = new Color( 255,255,255, ChassisSteeringShow ? 255 : 0 );
 			}
 		}
 
 		{
 			chassis_axle_rear = new ModelEntity();
-			chassis_axle_rear.SetModel( "entities/modular_vehicle/chassis_axle_rear.vmdl" );
+			chassis_axle_rear.SetModel( modelNameChassisRear );
 			chassis_axle_rear.Transform = Transform;
 			chassis_axle_rear.Parent = this;
-			chassis_axle_rear.LocalPosition = new Vector3( -1.05f, 0, 0.35f ) * 40.0f;
+			chassis_axle_rear.LocalPosition = ChassisRearPosition * 40.0f;
+			chassis_axle_rear.RenderColor = new Color( 255,255,255, ChassisRearShow ? 255 : 0 );
 
 			{
 				var chassis_transmission = new ModelEntity();
-				chassis_transmission.SetModel( "entities/modular_vehicle/chassis_transmission.vmdl" );
-				chassis_transmission.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Zero, Rotation.From( -90, 180, 0 ) ) );
+				chassis_transmission.SetModel( modelNameChassisTransmission );
+				chassis_transmission.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( ChassisTransmissionPosition, ChassisTransmissionRotation ) );
+				chassis_transmission.RenderColor = new Color( 255,255,255, ChassisTransmissionShow ? 255 : 0 );
 			}
 
 			{
 				wheel2 = new ModelEntity();
-				wheel2.SetModel( "entities/modular_vehicle/wheel_a.vmdl" );
-				wheel2.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Left * (0.7f * 40), Rotation.From( 0, 90, 0 ) ) );
+				wheel2.SetModel( modelNameWheelRearLeft );
+				wheel2.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Left * WheelRearLeftPosition, WheelRearLeftRotation ) );
+				wheel2.RenderColor = new Color( 255,255,255, WheelGlobalShow && WheelRearLeftShow ? 255 : 0 );
 			}
 
 			{
 				wheel3 = new ModelEntity();
-				wheel3.SetModel( "entities/modular_vehicle/wheel_a.vmdl" );
-				wheel3.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Right * (0.7f * 40), Rotation.From( 0, -90, 0 ) ) );
+				wheel3.SetModel( modelNameWheelRearRight );
+				wheel3.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Right * WheelRearRightPosition, WheelRearRightRotation ) );
+				wheel3.RenderColor = new Color( 255,255,255, WheelGlobalShow && WheelRearRightShow ? 255 : 0 );
 			}
+
+
 		}
 	}
 
@@ -492,7 +669,7 @@ public partial class CarEntity : Prop, IUse
 
 	public bool IsUsable( Entity user )
 	{
-		return driver == null;
+		return this.State == CarState.UNLOCK && driver == null;
 	}
 
 	public override void StartTouch( Entity other )

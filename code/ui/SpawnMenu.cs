@@ -2,10 +2,6 @@
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
-
 [Library]
 public partial class SpawnMenu : Panel
 {
@@ -31,6 +27,9 @@ public partial class SpawnMenu : Panel
 
 				var ents = body.AddChild<EntityList>();
 				tabs.AddButtonActive( "Entities", ( b ) => ents.SetClass( "active", b ) );
+
+				var vehicles = body.AddChild<VehiclesList>();
+				tabs.AddButtonActive( "Vehicles", ( b ) => vehicles.SetClass( "active", b ) );
 			}
 		}
 

@@ -1,0 +1,142 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "gendarmerie_brakes.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_brakes.vmat"
+							},
+							{
+								from = "gendarmerie_carbody.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_carbody.vmat"
+							},
+							{
+								from = "gendarmerie_carpet.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_carpet.vmat"
+							},
+							{
+								from = "gendarmerie_chrome.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_chrome.vmat"
+							},
+							{
+								from = "gendarmerie_glass.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_glass.vmat"
+							},
+							{
+								from = "gendarmerie_grid.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_grid.vmat"
+							},
+							{
+								from = "gendarmerie_interrior.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_interrior.vmat"
+							},
+							{
+								from = "gendarmerie_light_glass.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_lights_glass.vmat"
+							},
+							{
+								from = "gendarmerie_lights.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_lights.vmat"
+							},
+							{
+								from = "gendarmerie_marks.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_marks.vmat"
+							},
+							{
+								from = "gendarmerie_mirror.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_mirror.vmat"
+							},
+							{
+								from = "gendarmerie_misc.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_misc.vmat"
+							},
+							{
+								from = "gendarmerie_pipes.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_pipes.vmat"
+							},
+							{
+								from = "gendarmerie_plastic.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_plastic.vmat"
+							},
+							{
+								from = "gendarmerie_police_light.vmat"
+								to = "materials/car/custom/gendarmerie/gendarmerie_police_light.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_prop = "default"
+						origin = [ -28.19952, 0.874323, 50.79818 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 138.433411, 103.936676, 69.654099 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_prop = "default"
+						origin = [ 87.540787, 0.874323, 37.531189 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 105.063629, 103.936676, 43.120117 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_prop = "default"
+						origin = [ 52.648609, 0.874323, 67.973732 ]
+						angles = [ 25.0, 0.0, 0.0 ]
+						dimensions = [ 41.725754, 103.936676, 9.643224 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "resources/car/custom/gendarmerie/base.fbx"
+						import_translation = [ 0.0, 0.0, 10.0 ]
+						import_rotation = [ 0.0, 180.0, 0.0 ]
+						import_scale = 0.4
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+	}
+}

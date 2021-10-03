@@ -54,6 +54,7 @@ partial class SandboxPlayer : Player
 	/// </summary>
 	public SandboxPlayer()
 	{
+		InitWebSocket();
 		Inventory = new Inventory( this );
 	}
 

@@ -9,6 +9,13 @@ public partial class EntityList : Panel
 {
 	VirtualScrollPanel Canvas;
 
+	public bool Filter( Sandbox.LibraryAttribute x )
+	{
+		if ( !x.Spawnable ) return false;
+		if ( x.Name.StartsWith( "ent_car" ) ) return false;
+		return true;
+	}
+
 	public EntityList()
 	{
 		AddClass( "spawnpage" );
@@ -28,7 +35,7 @@ public partial class EntityList : Panel
 			};
 		};
 
-		var ents = Library.GetAllAttributes<Entity>().Where( x => x.Spawnable ).OrderBy( x => x.Title ).ToArray();
+		var ents = Library.GetAllAttributes<Entity>().Where( x => Filter( x ) ).OrderBy( x => x.Title ).ToArray();
 
 		foreach ( var entry in ents )
 		{
