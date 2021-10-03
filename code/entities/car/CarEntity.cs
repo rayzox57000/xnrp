@@ -90,7 +90,6 @@ public partial class CarEntity : Prop, IUse
 		plateP2 = RandomString( 3, false, true );
 		plateP3 = RandomString( 2, true, false );
 		plate = $"{plateP1}-{plateP2}-{plateP3}";
-		plate = "NN-987-NN";
 
 		frontLeft = new CarWheel( this );
 		frontRight = new CarWheel( this );

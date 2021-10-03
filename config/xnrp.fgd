@@ -14,14 +14,6 @@
 ]
 
 //
-// SandboxGame
-//
-@PointClass base(BaseProperties_xnrp) = sandbox : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-]
-
-//
 // Tool
 //
 @PointClass base(BaseProperties_xnrp) = weapon_tool : ""
@@ -271,6 +263,16 @@
 // PhysGun
 //
 @PointClass base(BaseProperties_xnrp) = physgun : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fists
+//
+@PointClass base(BaseProperties_xnrp) = weapon_fists : ""
 [
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
