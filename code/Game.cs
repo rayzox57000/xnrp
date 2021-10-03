@@ -3,7 +3,6 @@ using Sandbox.Maps;
 using Sandbox.Jobs.Categories;
 using System.Linq;
 
-[Library( "sandbox", Title = "Sandbox" )]
 partial class SandboxGame : Game
 {
 	public static JobsCategories JobsCategoriesList = new();
