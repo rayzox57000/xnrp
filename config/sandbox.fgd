@@ -14,19 +14,11 @@
 ]
 
 //
-// SandboxGame
-//
-@PointClass base(BaseProperties_sandbox) = sandbox : ""
-[
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-]
-
-//
 // Tool
 //
 @PointClass base(BaseProperties_sandbox) = weapon_tool : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -36,11 +28,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_balloon : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -50,7 +41,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -62,11 +53,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_bouncyball : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -76,7 +66,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -88,11 +78,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = directional_gravity : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -102,7 +91,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -114,11 +103,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_drone : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -128,7 +116,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -140,7 +128,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = ent_lamp : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input TurnOn(void) : ""
 	input TurnOff(void) : ""
@@ -157,7 +145,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = ent_light : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input TurnOn(void) : ""
 	input TurnOff(void) : ""
@@ -174,11 +162,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = noise_test : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -188,7 +175,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -200,11 +187,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_thruster : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -214,7 +200,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -226,11 +212,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_wheel : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -240,7 +225,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
@@ -252,7 +237,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = gravgun : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -262,7 +247,17 @@
 //
 @PointClass base(BaseProperties_sandbox) = physgun : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fists
+//
+@PointClass base(BaseProperties_sandbox) = weapon_fists : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -272,7 +267,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = weapon_flashlight : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -282,7 +277,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = weapon_pistol : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -292,7 +287,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = weapon_shotgun : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -302,7 +297,7 @@
 //
 @PointClass base(BaseProperties_sandbox) = weapon_smg : ""
 [
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
@@ -312,11 +307,10 @@
 //
 @PointClass base(BaseProperties_sandbox) model() = ent_car : ""
 [
-	model(studio) [report]: "World Model" : "" : "The model this entity should use."
-	skin(materialgroup) [ group="Render Properties" ] : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
-	bodygroups(bodygroupchoices) [ group="Render Properties" ] : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
-	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	renderamt(integer) [ group="Render Properties" ] : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
+	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
+	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
+	bodygroups(bodygroupchoices) { group = "Rendering" hide_when_solid = true } : "Body Groups" : "" : "Some models have multiple variations of certain items, such as characters having different hair styles, etc."
+	rendercolor(color255) { alpha = true } : "Color (R G B A)" : "255 255 255 255" : "The color tint of this entity."
 	collisiongroupoverride(choices) : "Collision Group Override" : -1 : "" =
 	[
 		-1 : "UNUSED"
@@ -326,7 +320,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 
