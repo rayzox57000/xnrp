@@ -1,4 +1,2 @@
-# xnrp
-Garry's Mod for s&amp;box
 THIS GAMEMODE IS CURRENTLY OUT.
 A NEW FUNCTIONAL VERSION? PERHAPS :)
